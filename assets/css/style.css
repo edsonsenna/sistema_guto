@@ -8,7 +8,7 @@
     background-color: #2e353d;
     position: relative;
     width: 180px;
-    height: 750px;
+    height: 350px;
     color: #e1ffff;
   }
   .nav-side-menu .brand {
@@ -137,3 +137,20 @@
       display: block;
     }
   }
+
+
+  /* Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3e8e41;
+}
+

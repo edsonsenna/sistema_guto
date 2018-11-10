@@ -20,6 +20,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('calendar');
+		$this->load->model('Equipamentos_model');
+		$this->load->model('Clientes_model');
+		$this->load->model('Servicos_model');
+        $data['equipamentos'] = $this->Equipamentos_model->get();
+		$data['clientes'] = $this->Clientes_model->get();
+		$data['tipo_servico'] = $this->Servicos_model->get();
+		$this->load->view('calendar', $data);
 	}
 }

@@ -14,11 +14,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						  <a href="#"><i class="fa fa-gift fa-lg"></i> Administrador <span class="arrow"></span></a>
 						</li>
 						<ul class="sub-menu collapse" id="administrador">
-							<li data-toggle="collapse" data-target="#admViagem" class="collapsed">
-							  <i class="fa fa-car fa-lg"></i> Viagens <span class="arrow"></span>
+							<li data-toggle="collapse" data-target="#servico" class="collapsed">
+							  <i class="fa fa-car fa-lg"></i> Servicos <span class="arrow"></span>
 							</li>
-							<ul class="sub-menu collapse" id="admViagem">
-								<a href="<?php echo base_url()?>index.php/System/testePDF"><li>Consultar</li></a>
+							<ul class="sub-menu collapse" id="servico">
+								<a href="<?php echo base_url()?>index.php/Servico"><li>Cadastrar/Alterar</li></a>
 							</ul>
 							
 							<li data-toggle="collapse" data-target="#admVeiculos" class="collapsed">

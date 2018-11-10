@@ -29,6 +29,7 @@ $this->load->view('commons/header');
 
                             <th>ID</th>
                             <th>Nome</th>
+                            <th>Email</th>
                             <th>Telefone</th>
                             <th>Data Cadastro</th>
                             <th>Saldo</th>
@@ -40,6 +41,7 @@ $this->load->view('commons/header');
                             <tr class="<?php if($cliente->saldo_cliente > 0) {echo 'bg-success';} else { echo 'bg-danger';} ?>">
                                 <td><?php echo $cliente->id_cliente?></td>
                                 <td><?php echo $cliente->nome_cliente?></td>
+                                <td><?php echo $cliente->email_cliente?></td>
                                 <td><?php echo $cliente->tel_cliente?></td>
                                 <td><?php echo $cliente->data_cadastro_cliente?></td>
                                 <td>R$ <?php echo $cliente->saldo_cliente?>,00</td>

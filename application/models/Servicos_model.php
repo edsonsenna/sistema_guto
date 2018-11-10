@@ -1,5 +1,5 @@
 <?php
-class Clientes_model extends CI_Model {
+class Servicos_model extends CI_Model {
 
     
     function __construct() {
@@ -17,7 +17,7 @@ class Clientes_model extends CI_Model {
     }
 
     function get($one=false){
-        $this->db->from('cliente');
+        $this->db->from('tipo_servico');
 
 
         $query = $this->db->get();
@@ -26,9 +26,9 @@ class Clientes_model extends CI_Model {
         return $result;
     }
 
-    function getCliente($id, $one=false){
-        $this->db->from('cliente');
-        $this->db->where('id_cliente', $id);
+    function getEquipamento($id, $one=false){
+        $this->db->from('equipamento');
+        $this->db->where('id_equipamento', $id);
 
 
         $query = $this->db->get();
@@ -37,23 +37,14 @@ class Clientes_model extends CI_Model {
         return $result;
     }
 
-    function busca_nome($nome_cliente, $one=false){
-        $this->db->from('cliente');
-        $this->db->like('nome_cliente', $nome_cliente);
-
-        $query = $this->db->get();
-        $result = !$one ? $query->result() : $query->row();
-        return $result;
-    }
-
-    function update($cliente)
+    function update($equipamento)
     {
-        $this->db->replace('cliente', $cliente);
+        $this->db->replace('equipamento', $equipamento);
     }
 
     function excluir($id)
     {
-        $this->db->delete('cliente', array('id_cliente' => $id));
+        $this->db->delete('equipamento', array('id_equipamento' => $id));
     }
 
 
