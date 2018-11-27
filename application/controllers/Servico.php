@@ -27,90 +27,52 @@ class Servico extends CI_Controller {
 		$this->load->view('servico/cadastro_servico', $data);
     }
     
-    public function listar_clientes(){
-        $this->load->model('Clientes_model');
-        $data['clientes'] = $this->Clientes_model->get();
-        $this->load->view('cliente/lista_clientes', $data);
-    }
+    public function novo_servico()
+    {
+        $this->load->model('Servicos_model');
+        
+        $format = 'Y-d-m H:i';
+        $string_date_start = $this->input->post('dia').' '.$this->input->post('inicio');
+        $string_date_end = $this->input->post('dia').' '.$this->input->post('fim');
+        $date_start = DateTime::createFromFormat($format, $string_date_start);
+        $date_end = DateTime::createFromFormat($format, $string_date_end);
 
-    public function cadastrar_cliente(){
-        $data['message_error'] = '';
-        $this->load->view('cliente/cadastro_cliente', $data);
-    }
-
-    public function cria_cliente(){
-        $this->load->model('Clientes_model');
 
         $dados = array(
-            "nome_cliente" => $this->input->post('nome'),
-            "tel_cliente" => $this->input->post('tel')
+            "id_cliente" => intval($this->input->post('cliente')),
+            "tipo_servico" => intval($this->input->post('tipo_servico')),
+            "id_usuario" => 1,
+            "pago_servico" => 1,
+            "id_equipamento" => intval($this->input->post('equip')),
+            "desconto_servico" => doubleval($this->input->post('desconto')), 
+            "data_inicio_servico" => get_object_vars($date_start)['date'],
+            "data_vencimento_servico" => get_object_vars($date_end)['date'],
+            "nome_servico" => $this->input->post('desc'),
+            "desc_servico" => $this->input->post('desc')
+
         );
 
-        if($this->Clientes_model->add('cliente', $dados)){
+        var_dump($dados);
+        
+
+        if ($this->Servicos_model->add('servico', $dados)) {
             $data['message_error'] = '<div class="alert alert-success alert-dismissible show" role="alert">
-            Cliente cadastrado com sucesso no BD!
+            Serviço cadastrado com sucesso no BD!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>';
-            $this->load->view('cliente/cadastro_cliente', $data);
-        }
-        else
-        {
+            $this->load->view('calendar', $data);
+        } else {
             $data['message_error'] = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Falha ao cadastrar Cliente no BD!
+            Falha ao cadastrar Serviço no BD!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>';
-            $this->load->view('cliente/cadastro_cliente', $data);
+            $this->load->view('calendar', $data);
         }
 
-    }
-
-    public function editar_cliente(){
-        if(($this->uri->segment(3)) && is_numeric($this->uri->segment(3)))
-		{
-			$id = $this->uri->segment(3);
-            $this->load->model('Clientes_model');
-			$cliente = $this->Clientes_model->getCliente($id, true);
-			if($cliente)
-			{
-				$dados['cliente'] = $cliente;
-				$dados['message_error'] = '';
-                $this->load->view('Cliente/cadastro_cliente', $dados);
-			}
-		}
-    }
-
-    public function excluir_cliente(){
-        if(($this->uri->segment(3)) && is_numeric($this->uri->segment(3)))
-		{
-			$id = $this->uri->segment(3);
-            $this->load->model('Clientes_model');
-            $this->Clientes_model->excluir($id);
-            redirect('Cliente/listar_clientes');
-			
-		}
-    }
-
-    public function atualizar_cliente(){
-        $this->load->model('Clientes_model');
-
-        $dados = array(
-            "id_cliente" => $this->input->post('id'),
-            "nome_cliente" => $this->input->post('nome'),
-            "tel_cliente" => $this->input->post('tel')
-        );
-
-        $this->Clientes_model->update($dados);
-        $data['message_fbdb'] = '<div class="alert alert-success alert-dismissible show" role="alert">
-        Cliente atualizado com sucesso no BD!
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>';
-
-        $this->load->view('Cliente/cadastro_cliente', $data);
+       
     }
 }

@@ -30,6 +30,15 @@ $(document).ready(function() {
       events: [ 
       ]
     });
+    $('#dias_1').change(function(){
+      $('#dias_semana').css("display", "none");
+    });
+    $('#dias_2').change(function(){
+      $('#dias_semana').css("display", "block");
+    });
+    $('#dias_3').change(function(){
+      $('#dias_semana').css("display", "block");
+    });    
 
     
   });
