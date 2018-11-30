@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
    
     $('.cliente_modal').select2({
       dropdownParent: $('#criarServico')
@@ -27,8 +28,33 @@ $(document).ready(function() {
         
       
       },
-      events: [ 
-      ]
+      events: function(start, end, timezone, callback) {
+        $.ajax({
+            url: 'http://localhost:3000/sistema_guto/index.php/Servico/get_json',
+            dataType: 'json',
+            type:'post',
+            data: {
+                
+            },
+            success: function(doc) {
+                var events = [];
+               
+                doc.forEach(function(r){
+                  events.push({
+                    id: r.id_servico,
+                    title: r.nome_servico,
+                    start: r.data_inicio_servico,
+                    end: r.data_vencimento_servico
+                  });
+                });
+             
+              callback(events);
+            }
+        });
+    }
+      
+      
+      
     });
     $('#dias_1').change(function(){
       $('#dias_semana').css("display", "none");

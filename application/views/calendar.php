@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->view('commons/header');
-
+//var_dump($servicos);
 ?>
 <div class="container">
 
@@ -91,13 +91,13 @@ $this->load->view('commons/header');
           </div>
           <div class="col-md-4 form-group control" id="dias_semana" style="display:none">
             <label for="dias_name">Informe os dias da Semana</label>
-            <input type="checkbox" name="dia_seg" id="dia_seg"> SEG <br>
-            <input type="checkbox" name="dia_ter" id="dia_ter"> TER <br>
-            <input type="checkbox" name="dia_qua" id="dia_qua"> QUA <br>
-            <input type="checkbox" name="dia_qui" id="dia_qui"> QUI <br>
-            <input type="checkbox" name="dia_sex" id="dia_sex"> SEX <br>
-            <input type="checkbox" name="dia_sab" id="dia_sab"> SAB <br>
-            <input type="checkbox" name="dia_dom" id="dia_dom"> DOM <br>
+            <input type="checkbox" name="dia_seg" id="dia_seg" value="Mon"> SEG <br>
+            <input type="checkbox" name="dia_ter" id="dia_ter" value="Tue"> TER <br>
+            <input type="checkbox" name="dia_qua" id="dia_qua" value="Wed"> QUA <br>
+            <input type="checkbox" name="dia_qui" id="dia_qui" value="Thu"> QUI <br>
+            <input type="checkbox" name="dia_sex" id="dia_sex" value="Fri"> SEX <br>
+            <input type="checkbox" name="dia_sab" id="dia_sab" value="Sat"> SAB <br>
+            <input type="checkbox" name="dia_dom" id="dia_dom" value="Sun"> DOM <br>
           </div>
           <div class="col-md-4 form-group control">
             <label for="desc">Descrição do Serviço:</label>

@@ -17,6 +17,18 @@ class Servicos_model extends CI_Model {
     }
 
     function get($one=false){
+        $this->db->select('*');
+        $this->db->from('servico');
+        $this->db->join('tipo_servico', 'servico.tipo_servico = tipo_servico.id_tipo_servico', 'right');
+
+
+        $query = $this->db->get();
+        
+        $result =  !$one  ? $query->result() : $query->row();
+        return $result;
+    }
+
+    function get_servico($one=false){
         $this->db->from('tipo_servico');
 
 
