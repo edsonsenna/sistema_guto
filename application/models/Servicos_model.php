@@ -49,6 +49,19 @@ class Servicos_model extends CI_Model {
         return $result;
     }
 
+    function verifica_serv($id_equipamento, $data_inicio, $data_fim, $first, $second='', $third='')
+    {
+
+        $sql = "SELECT * FROM servico WHERE (LEFT(DAYNAME(data_inicio_servico), 3) = \"".$first."\" OR LEFT(DAYNAME(data_inicio_servico), 3) = \"".$second."\" OR LEFT(DAYNAME(data_inicio_servico), 3) = \"".$third."\") AND (id_equipamento = ".$id_equipamento.") AND (\"".$data_inicio->format('Y-m-d H:i')."\" >= data_inicio_servico OR \"".$data_fim->format('Y-m-d H:i')."\" <= data_vencimento_servico)"; 
+        $query = $this->db->query($sql);
+
+        $result =  $query->num_rows() != 0 ? false : true;
+
+        return $result;
+
+       
+    }
+
     function update($equipamento)
     {
         $this->db->replace('equipamento', $equipamento);
