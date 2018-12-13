@@ -33,6 +33,7 @@ class Servicos_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('servico');
         $this->db->join('tipo_servico', 'servico.tipo_servico = tipo_servico.id_tipo_servico', 'right');
+        $this->db->join('cliente', 'servico.id_cliente = cliente.id_cliente', 'right');
         $this->db->where('data_inicio_servico >=', $date.' 00:00:00');
         $this->db->where('data_inicio_servico <=', $date.' 23:59:59');
 
@@ -86,6 +87,16 @@ class Servicos_model extends CI_Model {
     function update($equipamento)
     {
         $this->db->replace('equipamento', $equipamento);
+    }
+
+    function dar_presenca($id)
+    {
+       
+        $this->db->set('status_presenc', 1);
+        $this->db->where('servico.id_servico', $id);
+        $this->db->update('servico');
+        
+        return true;
     }
 
     function excluir($id)

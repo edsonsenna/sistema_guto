@@ -30,10 +30,24 @@ class Servico extends CI_Controller {
     public function presenca()
     {
         $today = date("Y-m-d");
-        var_dump($today);
+        //'2019-02-05';
+       
         $this->load->model('Servicos_model');
         $data['servicos'] = $this->Servicos_model->get_serv_day($today);
         $this->load->view('servico/presenca', $data);
+    }
+
+    public function dar_presenca()
+    {
+        if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
+            $id = $this->uri->segment(3);
+            $this->load->model('Servicos_model');
+            $update = $this->Servicos_model->dar_presenca($id);
+            if ($update) {
+                $dados['message_error'] = '';
+                $this->load->view('servico/presenca', $dados);
+            }
+        }
     }
     
     public function novo_servico()

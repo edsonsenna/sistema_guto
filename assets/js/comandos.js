@@ -82,4 +82,19 @@ $(document).ready(function() {
             tableBody.append('<tr class="search-sf"><td class="text-muted" colspan="6">No entries found.</td></tr>');
         }
     });
+
+    
 });
+
+function dar_presenca(id_servico){
+    $.ajax({
+        url: 'http://localhost:3000/sistema_guto/index.php/Servico/dar_presenca/'+id_servico,
+        type:'post',
+        data: {
+            
+        },
+        success: function(doc) {
+        
+        }
+    });
+}

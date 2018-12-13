@@ -9,7 +9,7 @@ var_dump($servicos);
 <div class="container">
  <?php $this->load->view('commons/side_menu'); ?>
  <div class="col-md-8">
-    <h2>Listar Clientes</h2>
+    <h2>Lista de Presença - <?php echo date('d-m-Y');?></h2>
     <div class="row">
         <div class="col-md-3">
             <form action="#" method="get">
@@ -28,25 +28,27 @@ var_dump($servicos);
                         <tr>
 
                             <th>ID</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
+                            <th>Cliente</th>
+                            <th>Descricao</th>
+                            <th>Data Inicio</th>
+                            <th>Data Fim</th>
                             <th>Data Cadastro</th>
-                            <th>Saldo</th>
+                            <th>Valor</th>
+                            <th>Presença</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($clientes as $cliente){ ?>
-                            <tr class="<?php if($cliente->saldo_cliente > 0) {echo 'bg-success';} else { echo 'bg-danger';} ?>">
-                                <td><?php echo $cliente->id_cliente?></td>
-                                <td><?php echo $cliente->nome_cliente?></td>
-                                <td><?php echo $cliente->email_cliente?></td>
-                                <td><?php echo $cliente->tel_cliente?></td>
-                                <td><?php echo $cliente->data_cadastro_cliente?></td>
-                                <td>R$ <?php echo $cliente->saldo_cliente?>,00</td>
-                                <td><a href="<?php echo base_url()?>index.php/Cliente/editar_cliente/<?php echo $cliente->id_cliente?>">Editar</a></td>
-                                <td><a href="<?php echo base_url()?>index.php/Cliente/excluir_cliente/<?php echo $cliente->id_cliente?>" onclick="confirm('Deseja excluir o(a) cliente cadastrado?');">Excluir</a></td>
+                        <?php foreach($servicos as $s){ ?>
+                            <tr class="<?php if($s->saldo_cliente - $s->valor_tipo_servico > 0) {echo 'bg-success';} else { echo 'bg-danger';} ?>">
+                                <td><?php echo $s->id_servico?></td>
+                                <td><?php echo $s->nome_cliente?></td>
+                                <td><?php echo $s->desc_servico?></td>
+                                <td><?php echo $s->data_inicio_servico?></td>
+                                <td><?php echo $s->data_vencimento_servico?></td>
+                                <td><?php echo $s->data_cadastro_servico?></td>
+                                <td>R$ <?php echo $s->valor_tipo_servico?>,00</td>
+                                <td><input class="btn btn-success" type="button" value="Presença" id="presenca" onclick="dar_presenca(<?php echo $s->id_servico; ?>)"></td>    
                             </tr>
                         <?php } ?>
                     </tbody>
