@@ -26,6 +26,15 @@ class Servico extends CI_Controller {
         $data['clientes'] = $this->Clientes_model->get();
 		$this->load->view('servico/cadastro_servico', $data);
     }
+
+    public function presenca()
+    {
+        $today = date("Y-m-d");
+        var_dump($today);
+        $this->load->model('Servicos_model');
+        $data['servicos'] = $this->Servicos_model->get_serv_day($today);
+        $this->load->view('servico/presenca', $data);
+    }
     
     public function novo_servico()
     {
@@ -67,8 +76,10 @@ class Servico extends CI_Controller {
         if(count($array_dias) >= 3){ if($array_dias[2] != null){ $third =  $array_dias[2]; }}
         $data_inicio = $data_base->format('Y-m-d').' '.$hora_base_inicio;
 
-        while($mes == $data_base->format('m')){
-            if(($this->Servicos_model->verifica_serv($id_equipamento, $date_start, $date_end, $first, $second, $third))){
+        $verif_serv = $this->Servicos_model->verifica_serv($id_equipamento, $date_start, $date_end, $first, $second, $third);
+
+        if($num_dias == 1) {
+            if($verif_serv) {
                 $dados = array(
                     "id_cliente" => intval($this->input->post('cliente')),
                     "tipo_servico" => intval($this->input->post('tipo_servico')),
@@ -82,18 +93,41 @@ class Servico extends CI_Controller {
                     "desc_servico" => $this->input->post('desc')
         
                 );
-    
-                if(in_array($data_base->format('D'), $array_dias)){
-                    $this->Servicos_model->add('servico', $dados);
-                    $data_base->modify('+1 day');
-                }else{
-                    $data_base->modify('+1 day');
-                }
-            }else{
-                break;
+
+                $this->Servicos_model->add('servico', $dados);
             }
+        }else{
+            while($mes == $data_base->format('m')){
+                if($verif_serv){
+                    $dados = array(
+                        "id_cliente" => intval($this->input->post('cliente')),
+                        "tipo_servico" => intval($this->input->post('tipo_servico')),
+                        "id_usuario" => 1,
+                        "pago_servico" => 1,
+                        "id_equipamento" => intval($this->input->post('equip')),
+                        "desconto_servico" => doubleval($this->input->post('desconto')), 
+                        "data_inicio_servico" => $data_base->format('Y-m-d').' '.$hora_base_inicio,
+                        "data_vencimento_servico" =>  $data_base->format('Y-m-d').' '.$hora_base_fim,
+                        "nome_servico" => $this->input->post('desc'),
+                        "desc_servico" => $this->input->post('desc')
             
+                    );
+        
+                    if(in_array($data_base->format('D'), $array_dias)){
+                        $this->Servicos_model->add('servico', $dados);
+                        $data_base->modify('+1 day');
+                    }else{
+                        $data_base->modify('+1 day');
+                    }
+                }else{
+                    break;
+                }
+                
+            }
+
         }
+
+        
 
         /*
         $data['message_error'] = '<div class="alert alert-success alert-dismissible show" role="alert">
