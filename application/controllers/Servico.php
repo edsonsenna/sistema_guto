@@ -42,10 +42,20 @@ class Servico extends CI_Controller {
         if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
             $id = $this->uri->segment(3);
             $this->load->model('Servicos_model');
-            $update = $this->Servicos_model->dar_presenca($id);
-            if ($update) {
-                $dados['message_error'] = '';
-                $this->load->view('servico/presenca', $dados);
+
+            $servico = array(
+                "id_servico" => $id,
+                "valor_presenca" => 1
+            );
+            $criar_presenca = $this->Servicos_model->add('presenca',$servico);
+            if($criar_presenca){
+                $update_servico = $this->Servicos_model->dar_presenca($id);
+                if ($update_servico) {
+                    echo 'Sucesso!';
+                }
+            }
+            else{
+                echo 'Fail!';
             }
         }
     }
@@ -101,8 +111,8 @@ class Servico extends CI_Controller {
                     "pago_servico" => 1,
                     "id_equipamento" => intval($this->input->post('equip')),
                     "desconto_servico" => doubleval($this->input->post('desconto')), 
-                    "data_inicio_servico" => $data_base->format('Y-m-d').' '.$hora_base_inicio,
-                    "data_vencimento_servico" =>  $data_base->format('Y-m-d').' '.$hora_base_fim,
+                    "data_inicio_servico" => $date_start->format('Y-m-d H:i'),
+                    "data_vencimento_servico" =>  $date_end->format('Y-m-d H:i'),
                     "nome_servico" => $this->input->post('desc'),
                     "desc_servico" => $this->input->post('desc')
         

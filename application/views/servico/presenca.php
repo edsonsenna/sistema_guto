@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $this->load->view('commons/header');
-var_dump($servicos);
+//var_dump($servicos);
 ?>
 
 <script src='<?php echo base_url(); ?>/assets/js/comandos.js'></script>
@@ -34,12 +34,15 @@ var_dump($servicos);
                             <th>Data Fim</th>
                             <th>Data Cadastro</th>
                             <th>Valor</th>
+                            <th>Status</th>
                             <th>Presença</th>
                             
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($servicos as $s){ ?>
+                        <?php foreach($servicos as $s){ 
+                            $saldo_final = $s->saldo_cliente - $s->valor_tipo_servico;
+                            ?>
                             <tr class="<?php if($s->saldo_cliente - $s->valor_tipo_servico > 0) {echo 'bg-success';} else { echo 'bg-danger';} ?>">
                                 <td><?php echo $s->id_servico?></td>
                                 <td><?php echo $s->nome_cliente?></td>
@@ -48,7 +51,9 @@ var_dump($servicos);
                                 <td><?php echo $s->data_vencimento_servico?></td>
                                 <td><?php echo $s->data_cadastro_servico?></td>
                                 <td>R$ <?php echo $s->valor_tipo_servico?>,00</td>
-                                <td><input class="btn btn-success" type="button" value="Presença" id="presenca" onclick="dar_presenca(<?php echo $s->id_servico; ?>)"></td>    
+                                <td><?php if($saldo_final < 0){ echo 'Saldo Insuficiente!'; } else if($s->status_presenc == '0'){ echo 'Em aberto!';} else{ echo 'Presente!';}?></td>
+                                <td><input class="btn btn-success"  type="button" value="Presença" id="presenca" onclick="dar_presenca(<?php echo $s->id_servico; ?>)"
+                                <?php if($s->status_presenc == '1' || $saldo_final < 0){ echo 'disabled';}?>></td>    
                             </tr>
                         <?php } ?>
                     </tbody>
