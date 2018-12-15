@@ -114,7 +114,8 @@ class Servico extends CI_Controller {
                     "data_inicio_servico" => $date_start->format('Y-m-d H:i'),
                     "data_vencimento_servico" =>  $date_end->format('Y-m-d H:i'),
                     "nome_servico" => $this->input->post('desc'),
-                    "desc_servico" => $this->input->post('desc')
+                    "desc_servico" => $this->input->post('desc'),
+                    "color" => "#9699E8"
         
                 );
 
@@ -133,7 +134,8 @@ class Servico extends CI_Controller {
                         "data_inicio_servico" => $data_base->format('Y-m-d').' '.$hora_base_inicio,
                         "data_vencimento_servico" =>  $data_base->format('Y-m-d').' '.$hora_base_fim,
                         "nome_servico" => $this->input->post('desc'),
-                        "desc_servico" => $this->input->post('desc')
+                        "desc_servico" => $this->input->post('desc'),
+                        "color" => "#9699E8"
             
                     );
         

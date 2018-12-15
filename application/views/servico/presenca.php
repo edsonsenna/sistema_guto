@@ -51,7 +51,7 @@ $this->load->view('commons/header');
                                 <td><?php echo $s->data_vencimento_servico?></td>
                                 <td><?php echo $s->data_cadastro_servico?></td>
                                 <td>R$ <?php echo $s->valor_tipo_servico?>,00</td>
-                                <td><?php if($saldo_final < 0){ echo 'Saldo Insuficiente!'; } else if($s->status_presenc == '0'){ echo 'Em aberto!';} else{ echo 'Presente!';}?></td>
+                                <td><?php if($saldo_final < 0 && $s->status_presenc == '0'){ echo 'Saldo Insuficiente!'; } else if($s->status_presenc == '0'){ echo 'Em aberto!';} else{ echo 'Presente!';}?></td>
                                 <td><input class="btn btn-success"  type="button" value="Presença" id="presenca" onclick="dar_presenca(<?php echo $s->id_servico; ?>)"
                                 <?php if($s->status_presenc == '1' || $saldo_final < 0){ echo 'disabled';}?>></td>    
                             </tr>

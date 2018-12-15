@@ -44,7 +44,8 @@ $(document).ready(function() {
                     id: r.id_servico,
                     title: r.nome_servico,
                     start: r.data_inicio_servico,
-                    end: r.data_vencimento_servico
+                    end: r.data_vencimento_servico,
+                    color: r.color
                   });
                 });
              

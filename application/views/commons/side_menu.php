@@ -19,15 +19,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</li>
 							<ul class="sub-menu collapse" id="servico">
 								<a href="<?php echo base_url()?>index.php/Servico"><li>Cadastrar/Alterar</li></a>
+								<a href="<?php echo base_url()?>index.php/Servico/presenca"><li>Presenca</li></a>
 							</ul>
 							
 							<li data-toggle="collapse" data-target="#admVeiculos" class="collapsed">
-							  <i class="fa fa-car fa-lg"></i> Veículos <span class="arrow"></span>
+							  <i class="fa fa-car fa-lg"></i> Teste <span class="arrow"></span>
 							</li>
 							<ul class="sub-menu collapse" id="admVeiculos">
-								<a href="<?php echo base_url()?>index.php/Veiculo/cadastrar_veiculo"><li>Cadastrar</li></a>
-								<li>Manutenção</li>
-								<a href="<?php echo base_url()?>index.php/Veiculo"><li>Buscar/Alterar</li></a>
+								<a href="<?php echo base_url()?>index.php/Veiculo/cadastrar_veiculo"><li>Teste</li></a>
+								<li>Teste</li>
+								<a href="<?php echo base_url()?>index.php/Veiculo"><li>Teste/Teste</li></a>
 							</ul>
 
 						
@@ -38,6 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<ul class="sub-menu collapse" id="admCliente">
 								<a href="<?php echo base_url()?>index.php/Cliente/cadastrar_cliente"><li>Cadastrar</li></a>
 								<a href="<?php echo base_url()?>index.php/Cliente/listar_clientes"><li>Buscar/Alterar</li></a>
+								<a href="<?php echo base_url()?>index.php/Cliente/pagamento"><li>Lançar Pagamento</li></a>
 							</ul>
 							
 							<li data-toggle="collapse" data-target="#admMotorista" class="collapsed">

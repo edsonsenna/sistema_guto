@@ -31,6 +31,28 @@ class Cliente extends CI_Controller
         $this->load->view('cliente/lista_clientes', $data);
     }
 
+    public function pagamento()
+    {
+        $this->load->model('Clientes_model');
+        $data['clientes'] = $this->Clientes_model->get();
+        $this->load->view('cliente/pagamento', $data);
+    }
+
+    public function lancar_pagamento()
+    {
+        $this->load->model('Clientes_model');
+        $pagamento = array(
+            "id_cliente" => $this->input->post('cliente'),
+            "valor_pagamento" => $this->input->post('valor'),
+            "data_pagamento" => $this->input->post('data') 
+         );
+        if($this->Clientes_model->add('pagamento', $pagamento))
+        {
+            redirect('Cliente/listar_clientes');
+        }
+            redirect('Cliente/pagamento');
+    }
+
     public function busca_cliente()
     {
         $nome_cliente = $this->input->post('nome');
