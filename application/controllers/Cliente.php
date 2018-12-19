@@ -78,6 +78,7 @@ class Cliente extends CI_Controller
         $dados = array(
             "nome_cliente" => $this->input->post('nome'),
             "tel_cliente" => $this->input->post('tel'),
+            "email_cliente" => $this->input->post('email')
         );
 
         if ($this->Clientes_model->add('cliente', $dados)) {

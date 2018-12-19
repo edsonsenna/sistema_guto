@@ -179,4 +179,33 @@ class Servico extends CI_Controller {
         echo json_encode($servicos);
 
     }
+
+    public function cria_tipo_servico()
+    {
+
+        $this->load->model('Servicos_model');
+
+        $tipo_servico = array(
+            "desc_tipo_servico" => $this->input->post('desc'),
+            "valor_tipo_servico" => $this->input->post('valor')
+        );
+
+        if($this->Servicos_model->add('tipo_servico', $tipo_servico)){
+            $this->session->set_flashdata('message_fdbd','<div class="alert alert-success alert-dismissible show" role="alert">
+            Tipo serviço cadastrado com sucesso!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+           
+        }else{
+            $this->session->set_flashdata('message_fdbd','<div class="alert alert-danger alert-dismissible show" role="alert">
+            Falha ao cadastrar tipo servico
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+        }
+        redirect('Servico');
+    }
 }

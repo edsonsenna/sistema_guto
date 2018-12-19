@@ -31,6 +31,12 @@ $this->load->view('commons/header');
                             echo $cliente->tel_cliente;
                         } ?>">
                     </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="fulano@detal.com.br" value="<?php if(isset($cliente)){
+                            echo $cliente->email_cliente;
+                        } ?>">
+                    </div>
                     <button type="submit" class="btn btn-default"><?php if(isset($cliente)){
                             echo 'Atualizar';
                         }else { echo 'Cadastrar'; } ?></button>
