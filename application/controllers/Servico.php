@@ -208,4 +208,26 @@ class Servico extends CI_Controller {
         }
         redirect('Servico');
     }
+
+    public function buscar_tipo()
+    {
+        $this->load->model('Servicos_model');
+        $data['tipo_servico'] = $this->Servicos_model->get_servico();
+
+        $this->load->view('servico/lista_tipo_servico', $data);
+    }
+
+    public function editar_tipo_servico()
+    {
+        if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
+            $id = $this->uri->segment(3);
+            $this->load->model('Servicos_model');
+            $tipo_servico = $this->Servicos_model->get_servico($id, true);
+            if ($tipo_servico) {
+                $dados['tipo_servico'] = $tipo_servico;
+                $dados['message_error'] = '';
+                $this->load->view('Servico/cadastro_servico', $dados);
+            }
+        }
+    }
 }

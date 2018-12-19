@@ -47,10 +47,11 @@ class Servicos_model extends CI_Model {
         return $result;
     }
 
-    function get_servico($one=false){
+    function get_servico($id=-1, $one=false){
         $this->db->from('tipo_servico');
-
-
+        if($id!=-1){
+            $this->db->where('id_tipo_servico', $id);
+        }
         $query = $this->db->get();
         
         $result =  !$one  ? $query->result() : $query->row();
