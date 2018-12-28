@@ -65,7 +65,7 @@ $this->load->view('commons/header');
             </select>
           </div>
           <div class="col-md-3 form-group control">
-            <label for="desconto">Desconto: (%)</label>
+            <label for="desconto">Desconto: (R$)</label>
             <input type="number" class="form-control" name="desconto" id="desconto" value="0.0" class="form-group">
           </div>
          

@@ -44,7 +44,7 @@ class Cliente extends CI_Controller
         $pagamento = array(
             "id_cliente" => $this->input->post('cliente'),
             "valor_pagamento" => $this->input->post('valor'),
-            "data_pagamento" => $this->input->post('data') 
+            "data_pagamento" => $this->input->post('data').' '.$this->input->post('hora') 
          );
         if($this->Clientes_model->add('pagamento', $pagamento))
         {

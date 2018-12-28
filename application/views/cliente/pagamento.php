@@ -7,6 +7,7 @@ $this->load->view('commons/header');
 <script>
     $(document).ready(function() {
         $('.cliente_modal').select2();
+       
     });
 </script>
 <div class="container">
@@ -26,22 +27,31 @@ $this->load->view('commons/header');
                             }?>
                             </select>
                         </div>
-                        <div class="col-md-4 form-group control">
-                            <label for="data">Data:</label>
-                            <input class=""type="datetime" name="data" id="data" value="<?php 
-                            setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-                            date_default_timezone_set('America/Sao_Paulo');
-                            echo date("d-m-Y H:i"); ?>">
-                        </div>
+                        
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <label for="valor">Valor:</label>
-                            <input type="number" name="valor" id="valor">
+                        <div class="col-md-4 form-group control">
+                            <label for="data">Data:</label>
+                            <input class="form-control" type="date" name="data" id="data" value="<?php 
+                            echo date("Y-m-d");?>">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-4 form-group control">
+                            <label for="hora">Hora:</label>
+                            <input class="form-control" type="time" name="hora" id="hora" value="<?php setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+                            date_default_timezone_set('America/Sao_Paulo'); echo date("H:i");?>">
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="row">
+                         <div class="col-md-4 form-group control">
+                            <label for="valor">Valor:</label>
+                            <input class="form-control" type="number" name="valor" id="valor">
+                        </div>
+                        
+                        <div class="col-md-4 form-group control">
                             <label for="desc">Descrição (Tipo Pagamento):</label>
-                            <input type="text" name="desc" id="desc">
+                            <input class="form-control" type="text" name="desc" id="desc">
                         </div>
                     </div>
                     <div class="row">
