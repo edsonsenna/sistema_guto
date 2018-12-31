@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="pt-br">
 <head>
 <meta charset='utf-8' />
-<link href='<?php echo base_url(); ?>/assets/css/fullcalendar.min.css' rel='stylesheet' />
+<link href='<?php echo base_url(); ?>assets/css/fullcalendar.min.css' rel='stylesheet' />
 <link href='<?php echo base_url(); ?>/assets/css/fullcalendar.print.min.css' rel='stylesheet' media='print' />
 <link href='<?php echo base_url(); ?>/assets/css/calendar.css' rel='stylesheet' />
 <link href='<?php echo base_url(); ?>/assets/css/bootstrap.css' rel='stylesheet' />

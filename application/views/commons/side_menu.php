@@ -18,17 +18,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							  <i class="fa fa-car fa-lg"></i> Servicos <span class="arrow"></span>
 							</li>
 							<ul class="sub-menu collapse" id="servico">
-								<a href="<?php echo base_url()?>index.php/Servico"><li>Cadastrar</li></a>
-								<a href="<?php echo base_url()?>index.php/Servico/buscar_tipo"><li>Buscar/Alterar</li></a>
-								<a href="<?php echo base_url()?>index.php/Servico/presenca"><li>Presenca</li></a>
+								<a href="<?php echo base_url()?>index.php/Service"><li>Cadastrar</li></a>
+								<a href="<?php echo base_url()?>index.php/Service/buscar_tipo"><li>Buscar/Alterar</li></a>
+								<a href="<?php echo base_url()?>index.php/Service/presenca"><li>Presenca</li></a>
 							</ul>
 							<li data-toggle="collapse" data-target="#admCliente" class="collapsed">
 							  <i class="fa fa-car fa-lg"></i> Clientes <span class="arrow"></span>
 							</li>
 							<ul class="sub-menu collapse" id="admCliente">
-								<a href="<?php echo base_url()?>index.php/Cliente/cadastrar_cliente"><li>Cadastrar</li></a>
-								<a href="<?php echo base_url()?>index.php/Cliente/listar_clientes"><li>Buscar/Alterar</li></a>
-								<a href="<?php echo base_url()?>index.php/Cliente/pagamento"><li>Lançar Pagamento</li></a>
+								<a href="<?php echo base_url()?>index.php/Client/new_client"><li>Cadastrar</li></a>
+								<a href="<?php echo base_url()?>index.php/Client/list_clients"><li>Buscar/Alterar</li></a>
+								<a href="<?php echo base_url()?>index.php/Client/new_payment"><li>Lançar Pagamento</li></a>
 							</ul>
 							
 							<li data-toggle="collapse" data-target="#admVeiculos" class="collapsed">

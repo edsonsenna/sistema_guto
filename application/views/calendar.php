@@ -50,8 +50,8 @@ $this->load->view('commons/header');
           <div class="col-md-4 form-group control">
             <label for="cliente">Cliente:</label>
             <select class="cliente_modal" name="cliente">
-              <?php foreach($clientes as $c){
-                echo "<option value=".$c->id_cliente.">".$c->nome_cliente."</option>";
+              <?php foreach($clients as $c){
+                echo "<option value=".$c->client_id.">".$c->client_name."</option>";
               }?>
             </select>
           </div>
@@ -59,24 +59,25 @@ $this->load->view('commons/header');
           <div class="col-md-3 form-group control">
             <label for="servico">Tipo Servico:</label>
             <select class="tipo_servico_modal" name="tipo_servico">
-              <?php foreach($tipo_servico as $tp){
-                echo "<option value=".$tp->id_tipo_servico.">".$tp->desc_tipo_servico." R$ ".$tp->valor_tipo_servico."</option>";
+              <?php foreach($service_type as $tp){
+                echo "<option value=".$tp->service_type_id.">".$tp->service_type_description." R$ ".$tp->service_type_value."</option>";
               }?>
             </select>
           </div>
+          
+        </div>
+
+        <div class="row">
           <div class="col-md-3 form-group control">
             <label for="desconto">Desconto: (R$)</label>
             <input type="number" class="form-control" name="desconto" id="desconto" value="0.0" class="form-group">
           </div>
          
-        </div>
-
-        <div class="row">
           <div class="col-md-4 form-group control">
             <label for="equip">Equipamento:</label>
             <select class="equip form-control" name="equip">
-              <?php foreach($equipamentos as $eq){
-                echo "<option value=".$eq->id_equipamento.">".$eq->nome_equipamento." => ".$eq->desc_equipamento."</option>";
+              <?php foreach($equipments as $eq){
+                echo "<option value=".$eq->equipment_id.">".$eq->equipment_name."</option>";
               }?>
             </select>
           </div>
