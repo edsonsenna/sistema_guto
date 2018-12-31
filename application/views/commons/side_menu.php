@@ -19,8 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</li>
 							<ul class="sub-menu collapse" id="servico">
 								<a href="<?php echo base_url()?>index.php/Service"><li>Cadastrar</li></a>
-								<a href="<?php echo base_url()?>index.php/Service/buscar_tipo"><li>Buscar/Alterar</li></a>
-								<a href="<?php echo base_url()?>index.php/Service/presenca"><li>Presenca</li></a>
+								<a href="<?php echo base_url()?>index.php/Service/search_type"><li>Buscar/Alterar</li></a>
+								<a href="<?php echo base_url()?>index.php/Service/new_presence"><li>Presenca</li></a>
 							</ul>
 							<li data-toggle="collapse" data-target="#admCliente" class="collapsed">
 							  <i class="fa fa-car fa-lg"></i> Clientes <span class="arrow"></span>

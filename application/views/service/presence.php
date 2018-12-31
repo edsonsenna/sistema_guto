@@ -40,17 +40,17 @@ $this->load->view('commons/header');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($servicos as $s){ 
+                        <?php foreach($services as $s){ 
                             $saldo_final = $s->saldo_cliente - $s->valor_tipo_servico;
                             ?>
                             <tr class="<?php if($s->saldo_cliente - $s->valor_tipo_servico > 0) {echo 'bg-success';} else { echo 'bg-danger';} ?>">
-                                <td><?php echo $s->id_servico?></td>
-                                <td><?php echo $s->nome_cliente?></td>
+                                <td><?php echo $s->service_id?></td>
+                                <td><?php echo $s->service_name?></td>
                                 <td><?php echo $s->desc_servico?></td>
-                                <td><?php echo $s->data_inicio_servico?></td>
-                                <td><?php echo $s->data_vencimento_servico?></td>
-                                <td><?php echo $s->data_cadastro_servico?></td>
-                                <td>R$ <?php echo $s->valor_tipo_servico?>,00</td>
+                                <td><?php echo $s->service_start_date?></td>
+                                <td><?php echo $s->service_end_date?></td>
+                                <td><?php echo $s->service_creation_date?></td>
+                                <td>R$ <?php echo $s->service_type_value?>,00</td>
                                 <td><?php if($saldo_final < 0 && $s->status_presenc == '0'){ echo 'Saldo Insuficiente!'; } else if($s->status_presenc == '0'){ echo 'Em aberto!';} else{ echo 'Presente!';}?></td>
                                 <td><input class="btn btn-success"  type="button" value="Presença" id="presenca" onclick="dar_presenca(<?php echo $s->id_servico; ?>)"
                                 <?php if($s->status_presenc == '1' || $saldo_final < 0){ echo 'disabled';}?>></td>    

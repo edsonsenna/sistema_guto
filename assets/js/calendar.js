@@ -30,7 +30,7 @@ $(document).ready(function() {
       },
       events: function(start, end, timezone, callback) {
         $.ajax({
-            url: 'http://localhost:3000/sistema_guto/index.php/Servico/get_json',
+            url: 'http://localhost:8080/sistema_guto/index.php/Service/get_json',
             dataType: 'json',
             type:'post',
             data: {
@@ -41,11 +41,11 @@ $(document).ready(function() {
                
                 doc.forEach(function(r){
                   events.push({
-                    id: r.id_servico,
-                    title: r.nome_servico,
-                    start: r.data_inicio_servico,
-                    end: r.data_vencimento_servico,
-                    color: r.color
+                    id: r.service_id,
+                    title: r.service_name,
+                    start: r.service_start_date,
+                    end: r.service_end_Date,
+                    color: r.service_color
                   });
                 });
              

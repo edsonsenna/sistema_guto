@@ -27,17 +27,17 @@ class Service extends CI_Controller {
 		$this->load->view('service/new_service', $data);
     }
 
-    public function presenca()
+    public function new_presence()
     {
         $today = date("Y-m-d");
         //'2019-02-05';
        
-        $this->load->model('Servicos_model');
-        $data['servicos'] = $this->Servicos_model->get_serv_day($today);
-        $this->load->view('servico/presenca', $data);
+        $this->load->model('Services_model');
+        $data['services'] = $this->Services_model->get_serv_day($today);
+        $this->load->view('service/presence', $data);
     }
 
-    public function dar_presenca()
+    public function create_presence()
     {
         if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
             $id = $this->uri->segment(3);
@@ -60,9 +60,9 @@ class Service extends CI_Controller {
         }
     }
     
-    public function novo_servico()
+    public function new_service()
     {
-        $this->load->model('Servicos_model');
+        $this->load->model('Services_model');
         
         $format = 'Y-m-d H:i';
         $string_date_start = $this->input->post('dia').' '.$this->input->post('inicio');
@@ -70,80 +70,76 @@ class Service extends CI_Controller {
         $date_start = DateTime::createFromFormat($format, $string_date_start);
         $date_end = DateTime::createFromFormat($format, $string_date_end);
 
-        $num_dias = $this->input->post('dias_semana');
-        $array_dias = [];
-        if($this->input->post('dia_seg') != null) { array_push($array_dias, 'Mon');}
-        if($this->input->post('dia_ter') != null) { array_push($array_dias, 'Tue');}
-        if($this->input->post('dia_qua') != null) { array_push($array_dias, 'Wed');}
-        if($this->input->post('dia_qui') != null) { array_push($array_dias, 'Thu');}
-        if($this->input->post('dia_sex') != null) { array_push($array_dias, 'Fri');}
-        if($this->input->post('dia_sab') != null) { array_push($array_dias, 'Sat');}
-        if($this->input->post('dia_dom') != null) { array_push($array_dias, 'Sun');}
+        $num_days = $this->input->post('dias_semana');
+        $array_days = [];
+        if($this->input->post('dia_seg') != null) { array_push($array_days, 'Mon');}
+        if($this->input->post('dia_ter') != null) { array_push($array_days, 'Tue');}
+        if($this->input->post('dia_qua') != null) { array_push($array_days, 'Wed');}
+        if($this->input->post('dia_qui') != null) { array_push($array_days, 'Thu');}
+        if($this->input->post('dia_sex') != null) { array_push($array_days, 'Fri');}
+        if($this->input->post('dia_sab') != null) { array_push($array_days, 'Sat');}
+        if($this->input->post('dia_dom') != null) { array_push($array_days, 'Sun');}
       
-        $data_inicio = $date_start;
+        $date_new = $date_start;
 
 
-        $data_base = new DateTime($data_inicio->format('Y').'-'.$data_inicio->format('m').'-01');
-        $hora_base_inicio = $this->input->post('inicio');
-        $hora_base_fim = $this->input->post('fim');
+        $date_base = new DateTime($date_new->format('Y').'-'.$date_new->format('m').'-01');
+        $hour_base_start = $this->input->post('inicio');
+        $hour_base_end = $this->input->post('fim');
         
-        $data_ger = get_object_vars($date_start)['date'];
-        $mes = intval(substr($data_ger,5, 6));
+        $date_ger = get_object_vars($date_start)['date'];
+        $mes = intval(substr($date_ger,5, 6));
         
         $first = '';
         $second = '';
         $third = '';
 
-        $id_equipamento = intval($this->input->post('equip'));
-        if($array_dias[0] != null){  $first =  $array_dias[0]; }
-        if(count($array_dias) >= 2 && $array_dias[1] != null){  $second = $array_dias[1]; }
-        if(count($array_dias) >= 3){ if($array_dias[2] != null){ $third =  $array_dias[2]; }}
-        $data_inicio = $data_base->format('Y-m-d').' '.$hora_base_inicio;
+        $equipment_id = intval($this->input->post('equip'));
+        if($array_days[0] != null){  $first =  $array_days[0]; }
+        if(count($array_days) >= 2 && $array_days[1] != null){  $second = $array_days[1]; }
+        if(count($array_days) >= 3){ if($array_days[2] != null){ $third =  $array_days[2]; }}
+        $date_inicio = $date_base->format('Y-m-d').' '.$hour_base_start;
 
-        $verif_serv = $this->Servicos_model->verifica_serv($id_equipamento, $date_start, $date_end, $first, $second, $third);
+        $verify_serv = $this->Services_model->verify_serv($equipment_id, $date_start, $date_end, $first, $second, $third);
 
-        if($num_dias == 1) {
-            if($verif_serv) {
-                $dados = array(
-                    "id_cliente" => intval($this->input->post('cliente')),
-                    "tipo_servico" => intval($this->input->post('tipo_servico')),
-                    "id_usuario" => 1,
-                    "pago_servico" => 1,
-                    "id_equipamento" => intval($this->input->post('equip')),
-                    "desconto_servico" => doubleval($this->input->post('desconto')), 
-                    "data_inicio_servico" => $date_start->format('Y-m-d H:i'),
-                    "data_vencimento_servico" =>  $date_end->format('Y-m-d H:i'),
-                    "nome_servico" => $this->input->post('desc'),
-                    "desc_servico" => $this->input->post('desc'),
-                    "color" => "#9699E8"
+        if($num_days == 1) {
+            if($verify_serv) {
+                $service = array(
+                    "client_id" => intval($this->input->post('cliente')),
+                    "service_type_id" => intval($this->input->post('tipo_servico')),
+                    "user_id" => 1,
+                    "equipment_id" => intval($this->input->post('equip')),
+                    "discount_value" => doubleval($this->input->post('desconto')), 
+                    "service_start_date" => $date_start->format('Y-m-d H:i'),
+                    "service_end_date" =>  $date_end->format('Y-m-d H:i'),
+                    "service_name" => $this->input->post('desc'),
+                    "service_color" => "#9699E8"
         
                 );
 
-                $this->Servicos_model->add('servico', $dados);
+                $this->Services_model->add('service', $service);
             }
         }else{
-            while($mes == $data_base->format('m')){
-                if($verif_serv){
-                    $dados = array(
-                        "id_cliente" => intval($this->input->post('cliente')),
-                        "tipo_servico" => intval($this->input->post('tipo_servico')),
-                        "id_usuario" => 1,
-                        "pago_servico" => 1,
-                        "id_equipamento" => intval($this->input->post('equip')),
-                        "desconto_servico" => doubleval($this->input->post('desconto')), 
-                        "data_inicio_servico" => $data_base->format('Y-m-d').' '.$hora_base_inicio,
-                        "data_vencimento_servico" =>  $data_base->format('Y-m-d').' '.$hora_base_fim,
-                        "nome_servico" => $this->input->post('desc'),
-                        "desc_servico" => $this->input->post('desc'),
-                        "color" => "#9699E8"
+            while($mes == $date_base->format('m')){
+                if($verify_serv){
+                    $service = array(
+                        "client_id" => intval($this->input->post('cliente')),
+                        "service_type_id" => intval($this->input->post('tipo_servico')),
+                        "user_id" => 1,
+                        "equipment_id" => intval($this->input->post('equip')),
+                        "discount_value" => doubleval($this->input->post('desconto')), 
+                        "service_start_date" => $date_base->format('Y-m-d').' '.$hour_base_start,
+                        "service_end_date" =>  $date_base->format('Y-m-d').' '.$hour_base_end,
+                        "service_name" => $this->input->post('desc'),
+                        "service_color" => "#9699E8"
             
                     );
         
-                    if(in_array($data_base->format('D'), $array_dias)){
-                        $this->Servicos_model->add('servico', $dados);
-                        $data_base->modify('+1 day');
+                    if(in_array($date_base->format('D'), $array_days)){
+                        $this->Services_model->add('service', $service);
+                        $date_base->modify('+1 day');
                     }else{
-                        $data_base->modify('+1 day');
+                        $date_base->modify('+1 day');
                     }
                 }else{
                     break;

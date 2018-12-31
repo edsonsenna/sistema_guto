@@ -33,11 +33,11 @@ class Services_model extends CI_Model {
     function get_serv_day($date, $one=false)
     {
         $this->db->select('*');
-        $this->db->from('servico');
-        $this->db->join('tipo_servico', 'servico.tipo_servico = tipo_servico.id_tipo_servico', 'right');
-        $this->db->join('cliente', 'servico.id_cliente = cliente.id_cliente', 'right');
-        $this->db->where('data_inicio_servico >=', $date.' 00:00:00');
-        $this->db->where('data_inicio_servico <=', $date.' 23:59:59');
+        $this->db->from('service');
+        $this->db->join('service_type', 'service.service_type_id = service_type.service_type_id', 'right');
+        $this->db->join('client', 'service.client_id = client.client_id', 'right');
+        $this->db->where('service_start_date >=', $date.' 00:00:00');
+        $this->db->where('service_end_date <=', $date.' 23:59:59');
 
 
 
@@ -69,15 +69,15 @@ class Services_model extends CI_Model {
         return $result;
     }
 
-    function verifica_serv($id_equipamento, $data_inicio, $data_fim, $first, $second='', $third='')
+    function verify_serv($equipment_id, $start_date, $end_date, $first, $second='', $third='')
     {
 
-        $sql = "SELECT * FROM servico WHERE (LEFT(DAYNAME(data_inicio_servico), 3) = \"".$first.
-        "\" OR LEFT(DAYNAME(data_inicio_servico), 3) = \"".$second.
-        "\" OR LEFT(DAYNAME(data_inicio_servico), 3) = \"".$third.
-        "\") AND (id_equipamento = ".$id_equipamento.") AND (\"".$data_inicio->format('Y-m-d H:i').
-        "\" BETWEEN data_inicio_servico AND data_vencimento_servico OR \"".$data_fim->format('Y-m-d H:i').
-        "\" BETWEEN data_inicio_servico AND data_vencimento_servico)"; 
+        $sql = "SELECT * FROM service WHERE (LEFT(DAYNAME(service_start_date), 3) = \"".$first.
+        "\" OR LEFT(DAYNAME(service_start_date), 3) = \"".$second.
+        "\" OR LEFT(DAYNAME(service_start_date), 3) = \"".$third.
+        "\") AND (equipment_id = ".$equipment_id.") AND (\"".$start_date->format('Y-m-d H:i').
+        "\" BETWEEN service_start_date AND service_end_date OR \"".$end_date->format('Y-m-d H:i').
+        "\" BETWEEN service_start_date AND service_end_date)"; 
         $query = $this->db->query($sql);
 
         $result =  $query->num_rows() != 0 ? false : true;

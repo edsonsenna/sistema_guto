@@ -25,7 +25,7 @@ $this->load->view('commons/header');
           </button>
         </div>
         <div class="modal-body">
-        <form id="novo_servico" action="<?php echo base_url()?>index.php/Servico/novo_servico" method="POST">
+        <form id="novo_servico" action="<?php echo base_url()?>index.php/Service/new_service" method="POST">
         <div class="row">    
 
           <div class="col-md-3 form-group control">
