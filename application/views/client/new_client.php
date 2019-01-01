@@ -16,6 +16,8 @@ $this->load->view('commons/header');
                     <?php
                         if(isset($client)){
                             echo '<input type="text" id="id" name="id" value="'.$client->client_id.'" style="display:none;">';
+                            echo '<input type="number" id="balance" name="balance" value="'.$client->client_balance.'" style="display:none;">';
+
                         }
                     ?>
                     <div class="form-group">

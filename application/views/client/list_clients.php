@@ -46,7 +46,8 @@ $this->load->view('commons/header');
                                 <td><?php echo $client->client_creation_date?></td>
                                 <td>R$ <?php echo $client->client_balance?>,00</td>
                                 <td><a href="<?php echo base_url()?>index.php/Client/edit_client/<?php echo $client->client_id?>">Editar</a></td>
-                                <td><a href="<?php echo base_url()?>index.php/Client/delete_client/<?php echo $client->client_id?>" onclick="confirm('Deseja excluir o(a) cliente cadastrado?');">Excluir</a></td>
+                                <td><a href=""
+                                onclick="confirm_delete(<?php echo $client->client_id?>);">Excluir</a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

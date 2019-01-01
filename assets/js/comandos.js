@@ -88,13 +88,26 @@ $(document).ready(function() {
 
 function dar_presenca(id_servico){
     $.ajax({
-        url: 'http://localhost:3000/sistema_guto/index.php/Servico/dar_presenca/'+id_servico,
+        url: 'http://localhost:8080/sistema_guto/index.php/Servico/dar_presenca/'+id_servico,
         type:'post',
         data: {
             
         },
         success: function(doc) {
-        
+            window.location.href = "http://localhost:8080/sistema_guto/";
         }
     });
+}
+
+function confirm_delete(client_id){
+    if(confirm('Deseja excluir o(a) cliente cadastrado?')){
+        $.ajax({
+            url: 'http://localhost:8080/sistema_guto/index.php/Client/delete_client/'+client_id,
+            type: 'post',
+            success: function(doc){
+                window.location.href = "http://localhost:8080/sistema_guto/";
+
+            }
+        });
+    }
 }

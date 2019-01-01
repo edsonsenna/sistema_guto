@@ -120,7 +120,7 @@ class Client extends CI_Controller
     {
         if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
             $id = $this->uri->segment(3);
-            $this->load->model('Clientes_model');
+            $this->load->model('Clients_model');
             $this->Clients_model->delete($id);
             redirect('Client/list_clients');
 
@@ -136,7 +136,8 @@ class Client extends CI_Controller
             "client_name" => $this->input->post('nome'),
             "client_telephone" => $this->input->post('tel'),
             "client_email" => $this->input->post('email'),
-            "client_birthday" => $this->input->post('birthday').' 00:00:00'
+            "client_birthday" => $this->input->post('birthday').' 00:00:00',
+            "client_balance" => $this->input->post('balance')
         );
 
         $this->Clients_model->update($dados);
