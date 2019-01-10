@@ -86,13 +86,10 @@ $(document).ready(function() {
     
 });
 
-function dar_presenca(id_servico){
+function ajax_presence(id_servico){
     $.ajax({
-        url: 'http://localhost:8080/sistema_guto/index.php/Servico/dar_presenca/'+id_servico,
+        url: 'http://localhost:8080/sistema_guto/index.php/Service/create_presence/'+id_servico,
         type:'post',
-        data: {
-            
-        },
         success: function(doc) {
             window.location.href = "http://localhost:8080/sistema_guto/";
         }

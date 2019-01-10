@@ -52,7 +52,7 @@ $this->load->view('commons/header');
                                 <td><?php echo $s->service_creation_date?></td>
                                 <td>R$ <?php echo $s->service_type_value?>,00</td>
                                 <td><?php if($final_balance < 0 && $s->has_presence == '0'){ echo 'Saldo Insuficiente!'; } else if($s->has_presence == '0'){ echo 'Em aberto!';} else{ echo 'Presente!';}?></td>
-                                <td><input class="btn btn-success"  type="button" value="Presença" id="presenca" onclick="dar_presenca(<?php echo $s->service_id; ?>)"
+                                <td><input class="btn btn-success"  type="button" value="Presença" id="presenca" onclick="ajax_presence(<?php echo $s->service_id; ?>)"
                                 <?php if($s->has_presence == '1' || $final_balance < 0){ echo 'disabled';}?>></td>    
                             </tr>
                         <?php } ?>
@@ -66,3 +66,4 @@ $this->load->view('commons/header');
 </div>
 
 <?php $this->load->view('commons/footer'); ?>
+

@@ -100,24 +100,44 @@ class Services_model extends CI_Model {
 		return FALSE;    
     }
 
-    function dar_presenca($id)
+    function presence($id)
     {
        
-        $this->db->set('status_presenc', 1);
-        $this->db->where('servico.id_servico', $id);
-        $this->db->update('servico');
+        $this->db->set('has_presence', 1);
+        $this->db->set('service_color', '#296329');
+        $this->db->where('service.service_id', $id);
+        $this->db->update('service');
         
-        return true;
+        if ($this->db->affected_rows() == '1')
+		{
+			return TRUE;
+		}
+		
+		return FALSE;    
     }
 
     function excluir($id)
     {
         $this->db->delete('equipamento', array('id_equipamento' => $id));
+
+        if ($this->db->affected_rows() == '1')
+		{
+			return TRUE;
+		}
+		
+		return FALSE;    
     }
 
     function delete_service_type($id)
     {
         $this->db->delete('service_type', array('service_type_id' => $id));
+
+        if ($this->db->affected_rows() == '1')
+		{
+			return TRUE;
+		}
+		
+		return FALSE;    
     }
 
 

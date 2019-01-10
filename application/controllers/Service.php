@@ -41,16 +41,16 @@ class Service extends CI_Controller {
     {
         if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
             $id = $this->uri->segment(3);
-            $this->load->model('Servicos_model');
-
-            $servico = array(
-                "id_servico" => $id,
-                "valor_presenca" => 1
+            $this->load->model('Services_model');
+            
+            $presence = array(
+                "service_id" => $id,
+                "presence_bool" => 1
             );
-            $criar_presenca = $this->Servicos_model->add('presenca',$servico);
-            if($criar_presenca){
-                $update_servico = $this->Servicos_model->dar_presenca($id);
-                if ($update_servico) {
+            $success_presence = $this->Services_model->add('presence', $presence);
+            if($success_presence){
+                $update_service = $this->Services_model->presence($id);
+                if ($update_service) {
                     echo 'Sucesso!';
                 }
             }
