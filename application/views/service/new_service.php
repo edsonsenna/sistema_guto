@@ -15,21 +15,23 @@ $message_fdbd = $this->session->flashdata('message_fdbd');
         <div class="col-md-8">
             <h3><?php if(isset($message_error)) { echo $message_error;} ?></h3>
             <h3><?php if(isset($message_fdbd)) { echo $message_fdbd;} ?></h3>
-            <form action="<?php echo base_url()?>index.php/Servico/<?php if(isset($cliente)) { echo 'atualizar_tipo_servico'; } else { echo 'cria_tipo_servico';} ?>" method="POST">
+            <form action="<?php echo base_url()?>index.php/Service/<?php if(isset($cliente)) { echo 'update_service_type'; } else { echo 'new_service_type';} ?>" method="POST">
                     <h3>Cadastro de Tipos de Serviços</h3>
-
+                    <input style="display:none;" type="text" class="form-control" id="id" name="id" value="<?php if(isset($service_type)){
+                            echo $service_type->service_type_id;
+                        } ?>">
 
                     <div class="form-group">
                         <label for="desc">Descrição do Serviço</label>
-                        <input type="text" class="form-control" id="desc" name="desc" placeholder="Digite a descrição" value="<?php if(isset($tipo_servico)){
-                            echo $tipo_servico->desc_tipo_servico;
+                        <input type="text" class="form-control" id="description" name="description" placeholder="Digite a descrição" value="<?php if(isset($service_type)){
+                            echo $service_type->service_type_description;
                         } ?>">
                     </div>
                 
                     <div class="form-group">
                         <label for="valor">Valor Unitário do Servico</label>
-                        <input type="number" class="form-control" id="valor" name="valor" placeholder="R$ 0,00" value="<?php if(isset($tipo_servico)){
-                            echo $tipo_servico->valor_tipo_servico;
+                        <input type="number" class="form-control" id="value" name="value" placeholder="R$ 0,00" value="<?php if(isset($service_type)){
+                            echo $service_type->service_type_value;
                         } ?>">
                     </div>
                     <button type="submit" class="btn btn-default"><?php if(isset($tipo_servico)){

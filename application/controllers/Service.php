@@ -176,17 +176,28 @@ class Service extends CI_Controller {
 
     }
 
-    public function cria_tipo_servico()
+    public function delete_service_type()
+    {
+        if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
+            $id = $this->uri->segment(3);
+            $this->load->model('Services_model');
+            $this->Services_model->delete_service_type($id);
+            redirect('Service/list_service_type');
+
+        }
+    }
+
+    public function new_service_type()
     {
 
-        $this->load->model('Servicos_model');
+        $this->load->model('Services_model');
 
-        $tipo_servico = array(
-            "desc_tipo_servico" => $this->input->post('desc'),
-            "valor_tipo_servico" => $this->input->post('valor')
+        $service_type = array(
+            "service_type_description" => $this->input->post('description'),
+            "service_type_value" => $this->input->post('value')
         );
 
-        if($this->Servicos_model->add('tipo_servico', $tipo_servico)){
+        if($this->Services_model->add('service_type', $service_type)){
             $this->session->set_flashdata('message_fdbd','<div class="alert alert-success alert-dismissible show" role="alert">
             Tipo serviço cadastrado com sucesso!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -202,28 +213,57 @@ class Service extends CI_Controller {
                 </button>
             </div>');
         }
-        redirect('Servico');
+        redirect('Service');
     }
 
-    public function buscar_tipo()
+    public function search_type()
     {
         $this->load->model('Services_model');
-        $data['service_type'] = $this->Services_model->get_service();
+        $data['service_type'] = $this->Services_model->get_service_type();
 
-        $this->load->view('servico/lista_tipo_servico', $data);
+        $this->load->view('service/list_service_type', $data);
     }
 
-    public function editar_tipo_servico()
+    public function edit_service_type()
     {
         if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
             $id = $this->uri->segment(3);
-            $this->load->model('Servicos_model');
-            $tipo_servico = $this->Servicos_model->get_servico($id, true);
-            if ($tipo_servico) {
-                $dados['tipo_servico'] = $tipo_servico;
-                $dados['message_error'] = '';
-                $this->load->view('Servico/cadastro_servico', $dados);
+            $this->load->model('Services_model');
+            $type_service = $this->Services_model->get_service_type($id, true);
+            if ($type_service) {
+                $data['type_service'] = $type_service;
+                $data['message_error'] = '';
+                $this->load->view('Service/new_service', $data);
             }
         }
+    }
+
+    public function update_service_type()
+    {
+        $this->load->model('Services_model');
+
+        $service_type = array(
+            "service_type_id" => $this->input->post('id'),
+            "service_type_description" => $this->input->post('description'),
+            "service_type_value" => $this->input->post('value')
+        );
+
+        if($this->Services_model->update('service_type', $service_type)){
+            $this->session->set_flashdata('message_fdbd','<div class="alert alert-success alert-dismissible show" role="alert">
+            Tipo serviço cadastrado com sucesso!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+           
+        }else{
+            $this->session->set_flashdata('message_fdbd','<div class="alert alert-danger alert-dismissible show" role="alert">
+            Falha ao cadastrar tipo servico
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>');
+        }
+        redirect('Service');
     }
 }

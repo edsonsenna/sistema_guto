@@ -35,13 +35,14 @@ $this->load->view('commons/header');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($tipo_servico as $ts){ ?>
+                        <?php foreach($service_type as $ts){ ?>
                             <tr class="bg-success">
-                                <td><?php echo $ts->id_tipo_servico?></td>
-                                <td><?php echo $ts->desc_tipo_servico?></td>
-                                <td>R$ <?php echo $ts->valor_tipo_servico?>,00</td>
-                                <td><a href="<?php echo base_url()?>index.php/Servico/editar_tipo_servico/<?php echo $ts->id_tipo_servico?>">Editar</a></td>
-                                <td><a href="<?php echo base_url()?>index.php/Servico/excluir_tipo_servico/<?php echo $ts->id_tipo_servico?>" onclick="confirm('Deseja excluir o(a) tipo de serviço cadastrado?');">Excluir</a></td>
+                                <td><?php echo $ts->service_type_id?></td>
+                                <td><?php echo $ts->service_type_description?></td>
+                                <td>R$ <?php echo $ts->service_type_value?>,00</td>
+                                <td><a href="<?php echo base_url()?>index.php/Service/edit_service_type/<?php echo $ts->service_type_id?>">Editar</a></td>
+                                <td><a href=""
+                                onclick="confirm_delete(<?php echo '\'Service\', \'delete_service_type\', '.$ts->service_type_id?>);">Excluir</a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

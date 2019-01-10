@@ -40,14 +40,14 @@ $this->load->view('commons/header');
                         <?php foreach($clients as $client){ ?>
                             <tr class="<?php if($client->client_balance > 0) {echo 'bg-success';} else { echo 'bg-danger';} ?>">
                                 <td><?php echo $client->client_id?></td>
-                                <td><?php echo $client->client_name?></td>
+                                <td><?php echo $client->client_name?></td> 
                                 <td><?php echo $client->client_email?></td>
                                 <td><?php echo $client->client_telephone?></td>
                                 <td><?php echo $client->client_creation_date?></td>
                                 <td>R$ <?php echo $client->client_balance?>,00</td>
                                 <td><a href="<?php echo base_url()?>index.php/Client/edit_client/<?php echo $client->client_id?>">Editar</a></td>
                                 <td><a href=""
-                                onclick="confirm_delete(<?php echo $client->client_id?>);">Excluir</a></td>
+                                onclick="confirm_delete(<?php echo '\'Client\', \'delete_client\','.$client->client_id?>);">Excluir</a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

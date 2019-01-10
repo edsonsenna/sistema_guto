@@ -99,10 +99,10 @@ function dar_presenca(id_servico){
     });
 }
 
-function confirm_delete(client_id){
+function confirm_delete(data_controller, data_action, data_id){
     if(confirm('Deseja excluir o(a) cliente cadastrado?')){
         $.ajax({
-            url: 'http://localhost:8080/sistema_guto/index.php/Client/delete_client/'+client_id,
+            url: 'http://localhost:8080/sistema_guto/index.php/'+data_controller+'/'+data_action+'/'+data_id,
             type: 'post',
             success: function(doc){
                 window.location.href = "http://localhost:8080/sistema_guto/";

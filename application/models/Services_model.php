@@ -87,9 +87,17 @@ class Services_model extends CI_Model {
        
     }
 
-    function update($equipamento)
+    function update($table_name, $data)
     {
-        $this->db->replace('equipamento', $equipamento);
+        $this->db->set($data);
+        $this->db->insert($table_name);
+
+        if ($this->db->affected_rows() == '1')
+		{
+			return TRUE;
+		}
+		
+		return FALSE;    
     }
 
     function dar_presenca($id)
@@ -105,6 +113,11 @@ class Services_model extends CI_Model {
     function excluir($id)
     {
         $this->db->delete('equipamento', array('id_equipamento' => $id));
+    }
+
+    function delete_service_type($id)
+    {
+        $this->db->delete('service_type', array('service_type_id' => $id));
     }
 
 
