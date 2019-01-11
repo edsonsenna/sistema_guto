@@ -42,10 +42,10 @@ class Service extends CI_Controller {
         if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
             $id = $this->uri->segment(3);
             $this->load->model('Services_model');
-            
+
             $presence = array(
                 "service_id" => $id,
-                "presence_bool" => 1
+                "presence_bool" => '1'
             );
             $success_presence = $this->Services_model->add('presence', $presence);
             if($success_presence){
@@ -172,6 +172,22 @@ class Service extends CI_Controller {
         $this->load->model('Services_model');
         $services = $this->Services_model->get();
 
+        echo json_encode($services);
+
+    }
+
+    public function get_json_places()
+    {
+        $this->load->model('Services_model');
+        $places = $this->Services_model->get_places();
+        echo json_encode($places);
+
+    }
+
+    public function get_json_service_type()
+    {
+        $this->load->model('Services_model');
+        $services = $this->Services_model->get_service_type();
         echo json_encode($services);
 
     }

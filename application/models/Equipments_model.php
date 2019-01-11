@@ -26,6 +26,13 @@ class Equipments_model extends CI_Model {
         return $result;
     }
 
+    function get_places($one=false){
+        $this->db->from('place');
+        $query = $this->db->get();
+        $result =  !$one  ? $query->result() : $query->row();
+        return $result;
+    }
+
     function get_equipment($id, $one=false){
         $this->db->from('equipment');
         $this->db->where('equipment_id', $id);
@@ -36,6 +43,8 @@ class Equipments_model extends CI_Model {
         $result =  !$one  ? $query->result() : $query->row();
         return $result;
     }
+
+
 
     function update($equipment)
     {

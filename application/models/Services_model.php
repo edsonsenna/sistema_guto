@@ -58,6 +58,17 @@ class Services_model extends CI_Model {
         return $result;
     }
 
+    function get_places($id=-1, $one=false){
+        $this->db->from('place');
+        if($id!=-1){
+            $this->db->where('place_id', $id);
+        }
+        $query = $this->db->get();
+        
+        $result =  !$one  ? $query->result() : $query->row();
+        return $result;
+    }
+
     function getEquipamento($id, $one=false){
         $this->db->from('equipamento');
         $this->db->where('id_equipamento', $id);
@@ -103,7 +114,7 @@ class Services_model extends CI_Model {
     function presence($id)
     {
        
-        $this->db->set('has_presence', 1);
+        $this->db->set('has_presence', '1');
         $this->db->set('service_color', '#296329');
         $this->db->where('service.service_id', $id);
         $this->db->update('service');

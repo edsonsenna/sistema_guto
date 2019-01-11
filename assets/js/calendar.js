@@ -2,11 +2,42 @@ $(document).ready(function() {
 
 
    
-    $('.cliente_modal').select2({
+    $('.client_modal').select2({
       dropdownParent: $('#criarServico')
     });
-    $('.tipo_servico_modal').select2({
+    $('.service_type_modal').select2({
       dropdownParent: $('#criarServico')
+    });
+    $('.place_modal').select2({
+      dropdownParent: $('#criarServico'),
+      ajax: {
+        url: "http://localhost:8080/sistema_guto/index.php/Service/get_json_places",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+            return {
+                q: params.term // search term
+            };
+        },
+        processResults: function (data) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            console.log(data);
+            var newArr = [];
+            $.each(data, function(index, item){
+              newArr.push({
+                'id': item.place_id,
+                'text': item.place_name
+              });
+            });
+            console.log(newArr);
+            return {
+                results: newArr
+            };
+        },
+        cache: true
+      }
     });
 
     $('#calendar').fullCalendar({
@@ -53,10 +84,30 @@ $(document).ready(function() {
             }
         });
     }
-      
-      
-      
+ 
     });
+
+    $('#place').on("select2:close", function (e) {
+
+      let placeEl = document.getElementById('place');
+      let serviceTypeEl = document.getElementById('service_type');
+      var data = "";
+      console.log(e);
+      $.ajax({
+        url: 'http://localhost:8080/sistema_guto/index.php/Service/get_service_type_json/',
+        type:'GET',
+        success: function(response) {
+            data = response;
+            return response;
+        }
+      });
+      $('.service_type_modal').select2({
+
+        dropdownParent: $('#criarServico')
+      });
+      console.log(data);
+    });
+    
     $('#dias_1').change(function(){
       $('#dias_semana').css("display", "none");
     });

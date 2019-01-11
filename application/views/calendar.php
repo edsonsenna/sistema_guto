@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $this->load->view('commons/header');
-//var_dump($servicos);
+//var_dump($places);
+//var_dump($equipments);
 ?>
 <div class="container">
 
@@ -45,25 +46,49 @@ $this->load->view('commons/header');
           
         </div>
 
+        <div class="row">
+          <div class="col-md-3 form-group control">
+            <label for="place">Local:</label>
+            <select id="place" class="place_modal" name="place">
+              <!-- <?php foreach($places as $p){
+                echo "<option value=".$p->places_id.">".$p->place_name."</option>";
+              }?> -->
+            </select>
+          </div>
+
+
+          <div class="col-md-3 form-group control">
+            <label for="service_type">Tipo Servico:</label>
+            <select id="service_type" class="service_type_modal" name="service_type">
+              <!-- <?php foreach($service_type as $tp){
+                echo "<option value=".$tp->service_type_id.">".$tp->service_type_description." R$ ".$tp->service_type_value."</option>";
+              }?> -->
+            </select>
+          </div>
+
+          <div class="col-md-4 form-group control">
+            <label for="equipment">Equipamento:</label>
+            <select class="equipment form-control" name="equipment">
+              <!-- <?php foreach($equipments as $eq){
+                echo "<option value=".$eq->equipment_id.">".$eq->equipment_name."</option>";
+              }?> -->
+            </select>
+          </div>
+
+        </div>
+
 
         <div class="row">
           <div class="col-md-4 form-group control">
-            <label for="cliente">Cliente:</label>
-            <select class="cliente_modal" name="cliente">
+            <label for="client">Cliente:</label>
+            <select class="client_modal" name="client">
               <?php foreach($clients as $c){
                 echo "<option value=".$c->client_id.">".$c->client_name."</option>";
               }?>
             </select>
           </div>
 
-          <div class="col-md-3 form-group control">
-            <label for="servico">Tipo Servico:</label>
-            <select class="tipo_servico_modal" name="tipo_servico">
-              <?php foreach($service_type as $tp){
-                echo "<option value=".$tp->service_type_id.">".$tp->service_type_description." R$ ".$tp->service_type_value."</option>";
-              }?>
-            </select>
-          </div>
+          
           
         </div>
 

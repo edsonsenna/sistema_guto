@@ -23,7 +23,8 @@ class Welcome extends CI_Controller {
 		$this->load->model('Equipments_model');
 		$this->load->model('Clients_model');
 		$this->load->model('Services_model');
-        $data['equipments'] = $this->Equipments_model->get();
+		$data['equipments'] = $this->Equipments_model->get();
+		$data['places'] = $this->Equipments_model->get_places();
 		$data['clients'] = $this->Clients_model->get();
 		$data['service_type'] = $this->Services_model->get_service_type();
 		$data['services'] = $this->Services_model->get();
