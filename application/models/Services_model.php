@@ -58,6 +58,28 @@ class Services_model extends CI_Model {
         return $result;
     }
 
+    function get_service_type_select($id=-1, $one=false){
+        $this->db->from('service_type');
+        if($id!=-1){
+            $this->db->where('place_id', $id);
+        }
+        $query = $this->db->get();
+        
+        $result =  !$one  ? $query->result() : $query->row();
+        return $result;
+    }
+
+    function get_equipment_select($id=-1, $one=false){
+        $this->db->from('equipment');
+        if($id!=-1){
+            $this->db->where('equipment_id', $id);
+        }
+        $query = $this->db->get();
+        
+        $result =  !$one  ? $query->result() : $query->row();
+        return $result;
+    }
+
     function get_places($id=-1, $one=false){
         $this->db->from('place');
         if($id!=-1){

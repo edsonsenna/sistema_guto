@@ -186,10 +186,22 @@ class Service extends CI_Controller {
 
     public function get_json_service_type()
     {
-        $this->load->model('Services_model');
-        $services = $this->Services_model->get_service_type();
-        echo json_encode($services);
+        if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
+            $id = $this->uri->segment(3);
+            $this->load->model('Services_model');
+            $services = $this->Services_model->get_service_type_select($id);
+            echo json_encode($services);
+        }
+    }
 
+    public function get_json_equipment()
+    {
+        if (($this->uri->segment(3)) && is_numeric($this->uri->segment(3))) {
+            $id = $this->uri->segment(3);
+            $this->load->model('Services_model');
+            $services = $this->Services_model->get_equipment_select($id);
+            echo json_encode($services);
+        }
     }
 
     public function delete_service_type()

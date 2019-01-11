@@ -49,7 +49,7 @@ $this->load->view('commons/header');
         <div class="row">
           <div class="col-md-3 form-group control">
             <label for="place">Local:</label>
-            <select id="place" class="place_modal" name="place">
+            <select id="place" class="place_modal form-control" name="place">
               <!-- <?php foreach($places as $p){
                 echo "<option value=".$p->places_id.">".$p->place_name."</option>";
               }?> -->
@@ -59,7 +59,7 @@ $this->load->view('commons/header');
 
           <div class="col-md-3 form-group control">
             <label for="service_type">Tipo Servico:</label>
-            <select id="service_type" class="service_type_modal" name="service_type">
+            <select id="service_type" class="service_type form-control" name="service_type">
               <!-- <?php foreach($service_type as $tp){
                 echo "<option value=".$tp->service_type_id.">".$tp->service_type_description." R$ ".$tp->service_type_value."</option>";
               }?> -->
@@ -68,7 +68,7 @@ $this->load->view('commons/header');
 
           <div class="col-md-4 form-group control">
             <label for="equipment">Equipamento:</label>
-            <select class="equipment form-control" name="equipment">
+            <select id="equipment" class="equipment form-control" name="equipment">
               <!-- <?php foreach($equipments as $eq){
                 echo "<option value=".$eq->equipment_id.">".$eq->equipment_name."</option>";
               }?> -->
